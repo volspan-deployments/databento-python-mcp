@@ -27,12 +27,14 @@ def get_client():
 @mcp.tool()
 def list_publishers() -> list:
     """List all publishers available on Databento, including their dataset and venue mappings."""
+    _track("list_publishers")
     client = get_client()
     return client.metadata.list_publishers()
 
 
 @mcp.tool()
 def list_datasets(
+    _track("list_datasets")
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
 ) -> list:
@@ -47,12 +49,14 @@ def list_datasets(
 @mcp.tool()
 def list_schemas(dataset: str) -> list:
     """List all available schemas for a given dataset code (e.g., 'GLBX.MDP3')."""
+    _track("list_schemas")
     client = get_client()
     return client.metadata.list_schemas(dataset=dataset)
 
 
 @mcp.tool()
 def list_fields(
+    _track("list_fields")
     encoding: str = "dbn",
     schema: Optional[str] = None,
 ) -> dict:
@@ -63,6 +67,7 @@ def list_fields(
 
 @mcp.tool()
 def list_unit_prices(
+    _track("list_unit_prices")
     dataset: str,
     mode: Optional[str] = None,
     schema: Optional[str] = None,
@@ -79,6 +84,7 @@ def list_unit_prices(
 @mcp.tool()
 def get_dataset_range(dataset: str) -> dict:
     """Get the available date range for a specific dataset."""
+    _track("get_dataset_range")
     client = get_client()
     result = client.metadata.get_dataset_range(dataset=dataset)
     return result
@@ -86,6 +92,7 @@ def get_dataset_range(dataset: str) -> dict:
 
 @mcp.tool()
 def get_record_count(
+    _track("get_record_count")
     dataset: str,
     start: str,
     end: Optional[str] = None,
@@ -110,6 +117,7 @@ def get_record_count(
 
 @mcp.tool()
 def get_billable_size(
+    _track("get_billable_size")
     dataset: str,
     start: str,
     end: Optional[str] = None,
@@ -134,6 +142,7 @@ def get_billable_size(
 
 @mcp.tool()
 def get_cost(
+    _track("get_cost")
     dataset: str,
     start: str,
     end: Optional[str] = None,
@@ -160,6 +169,7 @@ def get_cost(
 
 @mcp.tool()
 def symbology_resolve(
+    _track("symbology_resolve")
     dataset: str,
     symbols: str,
     stype_in: str,
@@ -182,6 +192,7 @@ def symbology_resolve(
 
 @mcp.tool()
 def timeseries_get_range_to_json(
+    _track("timeseries_get_range_to_json")
     dataset: str,
     start: str,
     symbols: str,
@@ -229,6 +240,7 @@ def timeseries_get_range_to_json(
 
 @mcp.tool()
 def batch_list_jobs(
+    _track("batch_list_jobs")
     states: Optional[str] = None,
     since: Optional[str] = None,
 ) -> list:
@@ -243,6 +255,7 @@ def batch_list_jobs(
 
 @mcp.tool()
 def batch_submit_job(
+    _track("batch_submit_job")
     dataset: str,
     symbols: str,
     schema: str,
@@ -278,6 +291,7 @@ def batch_submit_job(
 @mcp.tool()
 def batch_get_job(job_id: str) -> dict:
     """Get details of a specific batch job by its job ID."""
+    _track("batch_get_job")
     client = get_client()
     jobs = client.batch.list_jobs()
     for job in jobs:
